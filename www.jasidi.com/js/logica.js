@@ -157,3 +157,71 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// ... (Mantén todo el código JavaScript anterior para el menú, scroll, carrusel, etc.) ...
+
+// --- Formulario de Contacto (Envío a WhatsApp) ---
+const whatsappForm = document.getElementById('whatsapp-form'); // Seleccionamos el formulario por su nuevo ID
+const nameInput = document.getElementById('name');
+const phoneInput = document.getElementById('phone'); // Nuevo input para el teléfono
+const messageInput = document.getElementById('message');
+
+// Crear un elemento para mostrar mensajes de alerta
+const alertDiv = document.createElement('div');
+alertDiv.classList.add('alert');
+document.body.appendChild(alertDiv);
+
+const showAlert = (message, type) => {
+    alertDiv.textContent = message;
+    alertDiv.classList.remove('alert-success');
+    if (type === 'success') {
+        alertDiv.classList.add('alert-success');
+    } else {
+        alertDiv.classList.remove('alert-success');
+    }
+    alertDiv.classList.add('alert-show');
+
+    setTimeout(() => {
+        alertDiv.classList.remove('alert-show');
+    }, 3000);
+};
+
+if (whatsappForm) {
+    whatsappForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Previene el envío por defecto del formulario
+
+        // Validación de campos
+        if (nameInput.value.trim() === '' || phoneInput.value.trim() === '' || messageInput.value.trim() === '') {
+            showAlert('Por favor, completa todos los campos.', 'error');
+            return;
+        }
+
+        // Aquí debes colocar tu número de WhatsApp con el código de país, sin el signo '+'
+        // Ejemplo para Argentina (+549381XXXXXXX): '549381XXXXXXX'
+        const phoneNumber = '5493815088924'; // ¡CAMBIA ESTO CON TU NÚMERO!
+
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const userMessage = messageInput.value.trim();
+
+        // Construir el mensaje para WhatsApp
+        const whatsappMessage = `¡Hola! Me contacto desde tu sitio web.
+Nombre: ${name}
+Teléfono: ${phone}
+Mensaje: ${userMessage}`;
+
+        // Codificar el mensaje para la URL
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+
+        // Construir la URL de WhatsApp
+        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+        // Abrir WhatsApp en una nueva pestaña
+        window.open(whatsappURL, '_blank');
+
+        showAlert('¡Redirigiendo a WhatsApp! Por favor, confirma el envío.', 'success');
+
+        // Opcional: Limpiar el formulario después de redirigir
+        whatsappForm.reset();
+    });
+}

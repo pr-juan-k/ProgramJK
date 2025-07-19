@@ -8,8 +8,8 @@
     position: fixed; /* Fijo en la pantalla */
     bottom: 30px; /* Distancia desde la parte inferior */
     right: 30px; /* Distancia desde la parte derecha */
-    background-color: #007bff; /* Color de fondo */
-    color: rgb(231, 20, 20);
+    background-color: #0011ff; /* Color de fondo */
+    color: rgb(255, 255, 255);
     border: none;
     border-radius: 50%; /* Lo hace redondo */
     width: 50px; /* Ancho */

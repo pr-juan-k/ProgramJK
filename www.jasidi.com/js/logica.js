@@ -1,4 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ... (Tu código existente para Menú Hamburguesa, Navbar Scroll, Smooth Scroll, Carrusel y Formulario de Contacto) ...
+
+    // --- Botón flotante "Volver al principio" ---
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+    if (scrollToTopBtn) {
+        // Función para mostrar/ocultar el botón al hacer scroll
+        const toggleScrollToTopButton = () => {
+            if (window.scrollY > 300) { // Muestra el botón si el scroll es mayor a 300px
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        };
+
+        // Event listener para el scroll
+        window.addEventListener('scroll', toggleScrollToTopButton);
+        // Ejecutar al cargar la página por si ya hay scroll
+        window.addEventListener('load', toggleScrollToTopButton);
+
+        // Event listener para hacer clic en el botón
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0, // Desplazar al principio de la página
+                behavior: 'smooth' // Desplazamiento suave
+            });
+        });
+    }
+
+    // ... (Resto de tu código JavaScript) ...
+});
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
     // --- Lógica del Menú Hamburguesa ---
     const menuButton = document.getElementById('menu-button');
     const closeButton = document.getElementById('close-button');

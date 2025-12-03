@@ -359,46 +359,75 @@
                 ¿Cómo podemos ayudarte?
             </p>
             <form class="contact-form" id="whatsapp-form">
-                <div class="form-input">
-                    <input
-                        id="name"
-                        type="text"
-                        placeholder="Tu nombre"
-                        class="contact-input typography-content"
-                        required
-                    />
-                </div>
+              <div class="form-input">
+                  <input
+                      id="name"
+                      type="text"
+                      placeholder="Tu nombre"
+                      class="contact-input typography-content"
+                      required
+                  />
+              </div>
+          
+              <div class="form-input">
+                  <input
+                      id="phone"
+                      type="tel"
+                      placeholder="Tu teléfono (ej: +549381XXXXXXX)"
+                      class="contact-input typography-content"
+                      required
+                  />
+              </div>
+          
+              <div class="form-input">
+                  <textarea
+                      id="message"
+                      name="message"
+                      rows="3"
+                      maxlength="3000"
+                      required
+                      placeholder="Escribe tu mensaje aquí..."
+                      class="contact-input typography-content"
+                  ></textarea>
+              </div>
+          
+              <button
+                  type="submit"
+                  id="contact-button"
+                  class="contact-button typography-button"
+              >
+                  <p>ENVIAR MENSAJE POR WHATSAPP</p>
+              </button>
+          </form>
+          <script>
+            // Número de teléfono de destino (54 es el código de país de Argentina, 9381 es el código de área)
+            // Usaremos '5493815088924' para el número 3815088924
+            const WHATSAPP_NUMBER = '5493815088924';
         
-                <div class="form-input">
-                    <input
-                        id="phone"
-                        type="tel"
-                        placeholder="Tu teléfono (ej: +549381XXXXXXX)"
-                        class="contact-input typography-content"
-                        required
-                    />
-                </div>
+            // Obtener el formulario por su ID
+            const form = document.getElementById('whatsapp-form');
         
-                <div class="form-input">
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="3"
-                        maxlength="3000"
-                        required
-                        placeholder="Escribe tu mensaje aquí..."
-                        class="contact-input typography-content"
-                    ></textarea>
-                </div>
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
         
-                <button
-                    type="submit"
-                    id="contact-button"
-                    class="contact-button typography-button"
-                >
-                    <p>ENVIAR MENSAJE POR WHATSAPP</p>
-                </button>
-            </form>
+                // 1. Obtener los valores de los campos
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const message = document.getElementById('message').value;
+        
+                // 2. Construir el mensaje ordenado. Usamos '\n' para saltos de línea y '*' para negrita en WA.
+                const whatsappMessage = `¡Nuevo mensaje desde el formulario!\n\n*Nombre:* ${name}\n*Teléfono:* ${phone}\n*Mensaje:*\n${message}`;
+        
+                // 3. Codificar el mensaje
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+        
+                // 4. CONSTRUIR EL ENLACE DE WHATSAPP CON LA ESTRUCTURA wa.me CORRECTA
+                const whatsappLink = `https://wa.me/5493815088924?text=${encodedMessage}`;
+                
+                // 5. Abrir WhatsApp
+                window.open(whatsappLink, '_blank');
+            });
+        </script>
         </div>
         </section>
       </main>
